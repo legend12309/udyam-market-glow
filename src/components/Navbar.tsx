@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, Search, ShoppingCart, User, X, LogIn } from "lucide-react";
@@ -25,16 +24,14 @@ const Navbar = () => {
 
   return (
     <nav className={cn(
-      "w-full py-4 sticky top-0 z-50 transition-all duration-300",
-      isScrolled ? "bg-white/95 backdrop-blur-sm shadow-md" : "bg-white shadow-sm"
+      "w-full py-4 sticky top-0 z-50 transition-all duration-300 sketch-container bg-white/90 backdrop-blur-sm",
+      isScrolled ? "shadow-[4px_4px_0px_0px_rgba(26,31,44,0.2)]" : ""
     )}>
       <div className="container mx-auto px-4 flex items-center justify-between">
-        {/* Logo */}
         <Link to="/" className="flex items-center">
-          <h1 className="text-2xl font-bold text-udyam-royal-blue">UDYAM</h1>
+          <h1 className="text-2xl font-marker text-sketch-dark">UDYAM</h1>
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <Link to="/categories" className={cn(
             "link-hover font-medium transition-colors",
@@ -56,22 +53,21 @@ const Navbar = () => {
           </Link>
           <div className="relative group">
             <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-gray-400" />
+              <Search className="h-5 w-5 text-sketch-neutral" />
             </div>
             <input
               type="text"
               placeholder="Search products..."
-              className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none input-focus w-64 transition-all duration-300 focus:w-72"
+              className="pl-10 pr-4 py-2 rounded-full border-2 border-sketch-dark/20 focus:outline-none input-focus w-64 transition-all duration-300 focus:w-72 bg-white"
             />
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="hidden md:flex items-center space-x-4">
           <Link to="/cart">
-            <Button variant="ghost" size="icon" className="relative hover:bg-gray-100">
+            <Button variant="ghost" size="icon" className="relative hover:bg-sketch-gray">
               <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 bg-udyam-royal-blue text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 bg-sketch-purple text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-marker">
                 0
               </span>
             </Button>
@@ -79,21 +75,20 @@ const Navbar = () => {
           
           {user ? (
             <Link to="/profile">
-              <Button variant="ghost" size="icon" className="hover:bg-gray-100">
+              <Button variant="ghost" size="icon" className="hover:bg-sketch-gray">
                 <User className="h-5 w-5" />
               </Button>
             </Link>
           ) : (
             <Link to="/login">
-              <Button className="bg-udyam-royal-blue hover:bg-udyam-royal-blue/90 btn-hover flex gap-2 items-center">
+              <button className="sketch-button flex gap-2 items-center">
                 <LogIn className="h-4 w-4" />
                 Sign In
-              </Button>
+              </button>
             </Link>
           )}
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           className="md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -102,7 +97,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-white z-50 flex flex-col animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -114,12 +108,12 @@ const Navbar = () => {
           <div className="flex flex-col items-center justify-center space-y-8 flex-1 px-4">
             <div className="relative w-full mb-4">
               <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
+                <Search className="h-5 w-5 text-sketch-neutral" />
               </div>
               <input
                 type="text"
                 placeholder="Search products..."
-                className="pl-10 pr-4 py-3 rounded-full border border-gray-300 focus:outline-none input-focus w-full"
+                className="pl-10 pr-4 py-3 rounded-full border-2 border-sketch-dark/20 focus:outline-none input-focus w-full"
               />
             </div>
             

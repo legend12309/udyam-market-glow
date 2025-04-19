@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Permanent+Marker&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -75,11 +75,11 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-sketch-gray text-sketch-dark font-indie;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
+    @apply font-marker;
   }
 }
 
@@ -89,14 +89,38 @@
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:scale-[1.02];
+    @apply transition-all duration-300 hover:shadow-lg hover:scale-[1.02] border-2 border-sketch-dark/20;
   }
 
   .link-hover {
-    @apply transition-all duration-300 hover:text-primary;
+    @apply transition-all duration-300 hover:text-sketch-purple;
   }
 
   .input-focus {
-    @apply focus:ring-2 focus:ring-primary/20 focus:border-primary;
+    @apply focus:ring-2 focus:ring-sketch-purple/20 focus:border-sketch-purple;
   }
+
+  .sketch-container {
+    @apply relative overflow-hidden bg-white border-2 border-sketch-dark/20 rounded-lg shadow-[4px_4px_0px_0px_rgba(26,31,44,0.2)];
+  }
+
+  .sketch-button {
+    @apply bg-sketch-dark text-white border-2 border-sketch-dark rounded px-4 py-2 
+           shadow-[4px_4px_0px_0px_rgba(26,31,44,0.2)] 
+           hover:shadow-[2px_2px_0px_0px_rgba(26,31,44,0.2)] 
+           hover:translate-x-[2px] hover:translate-y-[2px] 
+           transition-all duration-200;
+  }
+}
+
+.font-indie {
+  font-family: 'Indie Flower', cursive;
+}
+
+.font-marker {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.sketch-pattern {
+  @apply bg-sketch-pattern;
 }
