@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, Search, ShoppingCart, User, X, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/providers/AuthProvider";
@@ -8,8 +8,10 @@ import { cn } from "@/lib/utils";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const { user } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +23,14 @@ const Navbar = () => {
   }, []);
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
+      setIsMenuOpen(false);
+    }
+  };
 
   return (
     <nav className={cn(
@@ -45,6 +55,12 @@ const Navbar = () => {
           )}>
             Sell
           </Link>
+          <Link to="/seller-products" className={cn(
+            "link-hover font-medium transition-colors",
+            location.pathname === "/seller-products" ? "text-udyam-royal-blue" : "text-gray-700"
+          )}>
+            My Listings
+          </Link>
           <Link to="/about" className={cn(
             "link-hover font-medium transition-colors",
             location.pathname === "/about" ? "text-udyam-royal-blue" : "text-gray-700"
@@ -52,14 +68,18 @@ const Navbar = () => {
             About
           </Link>
           <div className="relative group">
-            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-sketch-neutral" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search products..."
-              className="pl-10 pr-4 py-2 rounded-full border-2 border-sketch-dark/20 focus:outline-none input-focus w-64 transition-all duration-300 focus:w-72 bg-white"
-            />
+            <form className="w-full" onSubmit={handleSearchSubmit}>
+              <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <Search className="h-5 w-5 text-sketch-neutral" />
+              </div>
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-2 rounded-full border-2 border-sketch-dark/20 focus:outline-none input-focus w-64 transition-all duration-300 focus:w-72 bg-white"
+              />
+            </form>
           </div>
         </div>
 
@@ -107,14 +127,18 @@ const Navbar = () => {
           </div>
           <div className="flex flex-col items-center justify-center space-y-8 flex-1 px-4">
             <div className="relative w-full mb-4">
-              <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-sketch-neutral" />
-              </div>
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="pl-10 pr-4 py-3 rounded-full border-2 border-sketch-dark/20 focus:outline-none input-focus w-full"
-              />
+              <form className="w-full" onSubmit={handleSearchSubmit}>
+                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-sketch-neutral" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  className="pl-10 pr-4 py-3 rounded-full border-2 border-sketch-dark/20 focus:outline-none input-focus w-full"
+                />
+              </form>
             </div>
             
             <Link
@@ -132,18 +156,18 @@ const Navbar = () => {
               Sell
             </Link>
             <Link
+              to="/seller-products"
+              className="text-xl font-medium w-full text-center py-3 border-b border-gray-100"
+              onClick={closeMenu}
+            >
+              My Listings
+            </Link>
+            <Link
               to="/about"
               className="text-xl font-medium w-full text-center py-3 border-b border-gray-100"
               onClick={closeMenu}
             >
               About
-            </Link>
-            <Link
-              to="/cart"
-              className="text-xl font-medium w-full text-center py-3 border-b border-gray-100"
-              onClick={closeMenu}
-            >
-              Cart
             </Link>
             
             {user ? (

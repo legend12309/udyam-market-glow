@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,7 +12,6 @@ import Categories from "./pages/Categories";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Sell from "./pages/Sell";
-// New imported pages
 import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Trending from "./pages/Trending";
@@ -23,6 +21,8 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Cookies from "./pages/Cookies";
 import Sitemap from "./pages/Sitemap";
+import SellerProducts from "./pages/SellerProducts";
+import SearchResults from "./pages/SearchResults";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +53,8 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/sitemap" element={<Sitemap />} />
+            <Route path="/seller-products" element={<SellerProducts />} />
+            <Route path="/search" element={<SearchResults />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
